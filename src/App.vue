@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <!-- <v-app>
     <v-app-bar
       app
       color="primary"
@@ -40,18 +40,21 @@
     <v-main>
       <HelloWorld/>
     </v-main>
+  </v-app> -->
+  <v-app>
+    <Topbar />
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
+import Topbar from "./components/Topbar";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    HelloWorld,
+    Topbar,
   },
 
   data: () => ({
