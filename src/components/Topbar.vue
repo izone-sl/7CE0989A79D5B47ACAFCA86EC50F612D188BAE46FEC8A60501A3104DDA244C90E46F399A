@@ -78,7 +78,7 @@
         <v-spacer></v-spacer>
 
         <div class="AppbarIcons">
-          <v-btn class="ma-2 text-light mr-5" large fab color="indigo">
+          <v-btn class="ma-2 text-light mr-5" large fab color="indigo"  @click="dialog =true">
             <v-icon>mdi-cart</v-icon>
             <v-badge
               color="light-blue lighten-1"
@@ -102,7 +102,10 @@
         light
         class="res_main_app_bar"
       >
-        <v-app-bar-nav-icon class="mt-10"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon
+          class="mt-10"
+          @click.stop="drawer = !drawer"
+        ></v-app-bar-nav-icon>
         <v-spacer></v-spacer>
         <v-toolbar-title class="mt-5 pt-5">
           <v-img src="../assets/web logo.png" width="90px"></v-img
@@ -111,7 +114,7 @@
         <v-spacer></v-spacer>
 
         <div class="AppbarIcons">
-          <v-btn class="ma-3 text-light " small fab color="indigo">
+          <v-btn class="ma-3 text-light " small fab color="indigo" @click="dialog =true">
             <v-icon>mdi-cart</v-icon>
             <v-badge
               color="light-blue lighten-1"
@@ -164,7 +167,10 @@
                   <!-- <v-list-tile-action>
                     
                   </v-list-tile-action> -->
-                  <v-list-item-title> <v-icon>{{ link.icon }}</v-icon>{{ link.text }}</v-list-item-title>
+                  <v-list-item-title>
+                    <v-icon>{{ link.icon }}</v-icon
+                    >{{ link.text }}</v-list-item-title
+                  >
                 </template>
 
                 <!-- Sub categories -->
@@ -227,7 +233,7 @@
             <div class="ma-4">
               <span
                 >ALL CATEGORIES
-                <v-icon class="ml-8" @click.stop="drawer = !drawer"
+                <v-icon class="ml-8" @mouseover="drawer = !drawer"
                   >mdi-menu</v-icon
                 ></span
               >
@@ -257,7 +263,7 @@
           </v-toolbar-items>
 
           <v-toolbar-items>
-            <v-btn icon>
+            <v-btn icon  @click="dialog =true">
               <v-icon>mdi-cart</v-icon>
               <v-badge color="green" content="6"> </v-badge>
             </v-btn>
@@ -276,9 +282,9 @@
         height="60"
         class="res_appbar_on_scroll "
       >
-        <v-toolbar color="light-blue darken-4"  dark flat dense height="60">
+        <v-toolbar color="light-blue darken-4" dark flat dense height="60">
           <v-toolbar-items>
-            <v-btn icon  @click.stop="drawer = !drawer">
+            <v-btn icon @click.stop="drawer = !drawer">
               <v-icon small>mdi-menu</v-icon>
             </v-btn>
             <v-btn icon>
@@ -291,11 +297,7 @@
               <v-icon small>mdi-progress-question</v-icon>
             </v-btn>
 
-            <v-menu     
-              :close-on-content-click="false"
-              :nudge-width="200"
-              offset-x
-            >
+            <v-menu :close-on-content-click="false" :nudge-width="200" offset-x>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
                   <v-icon>mdi-search-web</v-icon>
@@ -318,13 +320,41 @@
               </v-card>
             </v-menu>
 
-            <v-btn icon>
+            <v-btn icon @click="dialog =true">
               <v-icon>mdi-cart</v-icon>
               <v-badge color="green" content="6"> </v-badge>
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
       </v-app-bar>
+
+      <!-- Cart Dialog -->
+      <v-row justify="center">
+        <v-dialog v-model="dialog" width="600px">
+          <!-- <template v-slot:activator="{ on, attrs }">
+            <v-btn color="primary" dark v-bind="attrs" v-on="on">
+              Open Dialog
+            </v-btn>
+          </template> -->
+          <v-card>
+            <v-card-title>
+              <span class="headline">Your Cart List</span>
+            </v-card-title>
+            <v-card-text
+              >CART LIST FUNCTION HAS BEEN UNDER DEVELOPMENT PROCESS</v-card-text
+            >
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="dialog = false"
+                >Disagree</v-btn
+              >
+              <v-btn color="green darken-1" text @click="dialog = false"
+                >Agree</v-btn
+              >
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
     </div>
   </div>
 </template>
@@ -345,6 +375,7 @@ export default {
       "Gas(Litro & Laugh)",
     ],
     drawer: null,
+    dialog: false,
     items: [
       { title: "Fruits & Vegetables", icon: "mdi-fruit-cherries" },
       { title: "Meat & Fish", icon: "mdi-fish" },

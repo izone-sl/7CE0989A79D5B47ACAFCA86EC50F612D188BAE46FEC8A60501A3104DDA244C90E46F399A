@@ -1,6 +1,6 @@
 <template>
   <div id="SocialSection">
-    Section
+    <!-- Section -->
     <v-row>
       <v-col>
         <v-card  hover="" outlined rounded="">
