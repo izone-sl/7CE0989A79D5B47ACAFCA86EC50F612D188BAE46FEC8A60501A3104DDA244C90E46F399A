@@ -158,7 +158,7 @@
       </v-row>
       <v-row class="Mobile_Search_and_CategoryMenu m-0">
         <v-col>
-          <v-toolbar flat>
+ 
             <v-toolbar dense flat color="indigo darken-3 text-light">
               <v-toolbar-title>ALL CATEGORIES</v-toolbar-title>
 
@@ -177,7 +177,7 @@
                 >mdi-menu</v-icon
               >
             </v-toolbar>
-          </v-toolbar>
+          
         </v-col>
       </v-row>
 
