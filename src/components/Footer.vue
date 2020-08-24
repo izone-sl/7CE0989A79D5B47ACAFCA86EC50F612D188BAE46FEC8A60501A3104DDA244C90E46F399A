@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Responsive -->
-    <v-row>
+    <v-row class="m-0">
       <v-col>
         EXPLORE
         <v-row>
@@ -130,7 +130,7 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row class="m-0">
       <v-col class="p-4 footer_cp_color">
         Copyright © 2020. Developed By : Raza9798
       </v-col>

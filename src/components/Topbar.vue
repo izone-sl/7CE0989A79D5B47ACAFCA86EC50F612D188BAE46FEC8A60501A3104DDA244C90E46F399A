@@ -78,7 +78,13 @@
         <v-spacer></v-spacer>
 
         <div class="AppbarIcons">
-          <v-btn class="ma-2 text-light mr-5" large fab color="indigo"  @click="dialog =true">
+          <v-btn
+            class="ma-2 text-light mr-5"
+            large
+            fab
+            color="indigo"
+            @click="dialog = true"
+          >
             <v-icon>mdi-cart</v-icon>
             <v-badge
               color="light-blue lighten-1"
@@ -100,6 +106,7 @@
         extended=""
         dense
         light
+        flat
         class="res_main_app_bar"
       >
         <v-app-bar-nav-icon
@@ -114,7 +121,13 @@
         <v-spacer></v-spacer>
 
         <div class="AppbarIcons">
-          <v-btn class="ma-3 text-light " small fab color="indigo" @click="dialog =true">
+          <v-btn
+            class="ma-3 text-light "
+            small
+            fab
+            color="indigo"
+            @click="dialog = true"
+          >
             <v-icon>mdi-cart</v-icon>
             <v-badge
               color="light-blue lighten-1"
@@ -128,7 +141,94 @@
           <span class="ml-0 mr-0  text-success">Rs. 10000</span>
         </div>
       </v-app-bar>
-      <!--  -->
+
+      <!-- Mobile Search and ALL Category -->
+      <v-row class="Mobile_Search_and_CategoryMenu m-0">
+        <v-col class="pa-3">
+          <v-row>
+            <v-col>
+              <v-text-field
+                outlined
+                label="SEARCH THE STORE HERE"
+                append-outer-icon="mdi-shopping-search"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+      <v-row class="Mobile_Search_and_CategoryMenu m-0">
+        <v-col>
+          <v-toolbar flat>
+            <v-toolbar dense flat color="indigo darken-3 text-light">
+              <v-toolbar-title>ALL CATEGORIES</v-toolbar-title>
+
+              <v-spacer></v-spacer>
+
+              <v-icon
+                class="text-light"
+                @click="allCategory = false"
+                v-if="allCategory"
+                >mdi-menu</v-icon
+              >
+              <v-icon
+                class="text-light"
+                @click="allCategory = true" 
+                v-if="!allCategory"
+                >mdi-menu</v-icon
+              >
+            </v-toolbar>
+          </v-toolbar>
+        </v-col>
+      </v-row>
+
+      <v-row class="Mobile_Search_and_CategoryMenu m-0" v-if="allCategory">
+        <v-col class="pa-3">
+          <!-- ALL CATEGORIES -->
+          <v-list dense>
+            <v-list class="vlistScroll">
+              <div v-for="(link, i) in links" :key="i">
+                <v-list-tile
+                  v-if="!link.subLinks"
+                  :key="i"
+                  :to="link.to"
+                  :active-class="color"
+                  avatar
+                  class="v-list-item"
+                >
+                  <v-list-tile-title v-text="link.text" />
+                </v-list-tile>
+
+                <v-list-group v-else :key="link.text" no-action>
+                  <template v-slot:activator>
+                    <v-list-item-title>
+                      <v-icon>{{ link.icon }}</v-icon
+                      >{{ link.text }}</v-list-item-title
+                    >
+                  </template>
+
+                  <!-- Sub categories -->
+                  <v-list
+                    rounded
+                    v-for="sublink in link.subLinks"
+                    :to="sublink.to"
+                    :key="sublink.text"
+                  >
+                    <v-list-item-group color="primary">
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title
+                            v-text="sublink.text"
+                          ></v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list-item-group>
+                  </v-list>
+                </v-list-group>
+              </div>
+            </v-list>
+          </v-list>
+        </v-col>
+      </v-row>
 
       <v-navigation-drawer app v-model="drawer" class="h-100" temporary>
         <!-- Drawer Header -->
@@ -263,7 +363,7 @@
           </v-toolbar-items>
 
           <v-toolbar-items>
-            <v-btn icon  @click="dialog =true">
+            <v-btn icon @click="dialog = true">
               <v-icon>mdi-cart</v-icon>
               <v-badge color="green" content="6"> </v-badge>
             </v-btn>
@@ -320,7 +420,7 @@
               </v-card>
             </v-menu>
 
-            <v-btn icon @click="dialog =true">
+            <v-btn icon @click="dialog = true">
               <v-icon>mdi-cart</v-icon>
               <v-badge color="green" content="6"> </v-badge>
             </v-btn>
@@ -341,7 +441,8 @@
               <span class="headline">Your Cart List</span>
             </v-card-title>
             <v-card-text
-              >CART LIST FUNCTION HAS BEEN UNDER DEVELOPMENT PROCESS</v-card-text
+              >CART LIST FUNCTION HAS BEEN UNDER DEVELOPMENT
+              PROCESS</v-card-text
             >
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -375,6 +476,8 @@ export default {
       "Gas(Litro & Laugh)",
     ],
     drawer: null,
+    allCategory: true,
+
     dialog: false,
     items: [
       { title: "Fruits & Vegetables", icon: "mdi-fruit-cherries" },
@@ -687,6 +790,9 @@ export default {
   .res_appbar_on_scroll {
     display: block;
   }
+  .Mobile_Search_and_CategoryMenu {
+    display: block;
+  }
 }
 
 /* medium size */
@@ -704,6 +810,9 @@ export default {
     display: block;
   }
   .res_main_app_bar {
+    display: block;
+  }
+  .Mobile_Search_and_CategoryMenu {
     display: block;
   }
 }
@@ -725,6 +834,9 @@ export default {
   .res_main_app_bar {
     display: block;
   }
+  .Mobile_Search_and_CategoryMenu {
+    display: block;
+  }
 }
 
 /* tablet size */
@@ -742,6 +854,9 @@ export default {
     display: block;
   }
   .res_main_app_bar {
+    display: block;
+  }
+  .Mobile_Search_and_CategoryMenu {
     display: block;
   }
 }
@@ -764,6 +879,9 @@ export default {
     display: none;
   }
   .res_appbar_on_scroll {
+    display: none;
+  }
+  .Mobile_Search_and_CategoryMenu {
     display: none;
   }
 }

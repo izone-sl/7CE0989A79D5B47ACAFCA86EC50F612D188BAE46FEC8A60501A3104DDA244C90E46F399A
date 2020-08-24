@@ -1,6 +1,6 @@
 r<template>
   <div id="SubsribeSection">
-    <v-row>
+    <v-row class="m-0">
       <v-col class="sub">
         <v-row>
       
