@@ -13,6 +13,9 @@
       >
         <v-spacer></v-spacer>
         <v-toolbar-items>
+          <v-btn text x-small to="/" class="btn">
+            <v-icon small>mdi-home </v-icon> Home
+          </v-btn>
           <v-btn text x-small>
             <v-icon small>mdi-heart </v-icon> WishList
           </v-btn>
@@ -56,13 +59,26 @@
           <v-img src="../assets/web logo.png" width="90px"></v-img
         ></v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-col class="mt-14 ml-10" md="2" sm="12">
-          <v-overflow-btn
-            small
-            :items="dropdown_font"
-            label="ALL CATEGORIES"
-            append-icon="mdi-chevron-down"
-          ></v-overflow-btn>
+
+        <v-col class="mt-9 ml-10" md="2" sm="12">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn tile outlined v-on="on">
+                ALL CATEGORIES <v-icon>mdi-chevron-down</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-tile v-for="(item, index) in dropdown_links" :key="index">
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-btn text :to="item.to" class="btn">
+                      {{ item.link }}
+                    </v-btn>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
         </v-col>
 
         <v-col class="searchContent " md="5" sm="12">
@@ -158,30 +174,31 @@
       </v-row>
       <v-row class="Mobile_Search_and_CategoryMenu m-0">
         <v-col>
- 
-            <v-toolbar dense flat color="indigo darken-3 text-light">
-              <v-toolbar-title>ALL CATEGORIES</v-toolbar-title>
+          <v-toolbar dense flat color="indigo darken-3 text-light">
+            <v-toolbar-title>ALL CATEGORIES</v-toolbar-title>
 
-              <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
 
-              <v-icon
-                class="text-light"
-                @click="allCategory = false"
-                v-if="allCategory"
-                >mdi-menu</v-icon
-              >
-              <v-icon
-                class="text-light"
-                @click="allCategory = true" 
-                v-if="!allCategory"
-                >mdi-menu</v-icon
-              >
-            </v-toolbar>
-          
+            <v-icon
+              class="text-light"
+              @click="allCategory = false"
+              v-if="allCategory"
+              >mdi-menu</v-icon
+            >
+            <v-icon
+              class="text-light"
+              @click="allCategory = true"
+              v-if="!allCategory"
+              >mdi-menu</v-icon
+            >
+          </v-toolbar>
         </v-col>
       </v-row>
-
-      <v-row class="Mobile_Search_and_CategoryMenu m-0" v-if="allCategory">
+      <v-row
+        class="Mobile_Search_and_CategoryMenu m-0"
+        v-if="allCategory"
+        transition="slide-x-transition"
+      >
         <v-col class="pa-3">
           <!-- ALL CATEGORIES -->
           <v-list dense>
@@ -195,7 +212,7 @@
                   avatar
                   class="v-list-item"
                 >
-                  <v-list-tile-title v-text="link.text" />
+                  <v-list-tile-title v-text="link.text" ></v-list-tile-title>
                 </v-list-tile>
 
                 <v-list-group v-else :key="link.text" no-action>
@@ -216,9 +233,15 @@
                     <v-list-item-group color="primary">
                       <v-list-item>
                         <v-list-item-content>
-                          <v-list-item-title
-                            v-text="sublink.text"
-                          ></v-list-item-title>
+                            <v-btn
+                          :to="sublink.to"
+                          text
+                          v-text="sublink.text"
+                          class="btn  "
+                          tile
+                          small=""
+                        >
+                        </v-btn>
                         </v-list-item-content>
                       </v-list-item>
                     </v-list-item-group>
@@ -268,9 +291,9 @@
                     
                   </v-list-tile-action> -->
                   <v-list-item-title>
-                    <v-icon>{{ link.icon }}</v-icon
-                    >{{ link.text }}</v-list-item-title
-                  >
+                    <v-icon>{{ link.icon }}</v-icon>
+                    {{ link.text }}
+                  </v-list-item-title>
                 </template>
 
                 <!-- Sub categories -->
@@ -280,15 +303,18 @@
                   :to="sublink.to"
                   :key="sublink.text"
                 >
-                  <!-- <v-list-tile-action>
-                    <v-icon>{{ sublink.icon }}</v-icon>
-                  </v-list-tile-action> -->
                   <v-list-item-group color="primary">
                     <v-list-item>
                       <v-list-item-content>
-                        <v-list-item-title
+                        <v-btn
+                          :to="sublink.to"
+                          text
                           v-text="sublink.text"
-                        ></v-list-item-title>
+                          class="btn  "
+                          tile
+                          small=""
+                        >
+                        </v-btn>
                       </v-list-item-content>
                     </v-list-item>
                   </v-list-item-group>
@@ -304,7 +330,15 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-btn
+                :to="item.to"
+                text
+                v-text="item.title"
+                class="btn  "
+                tile
+                small=""
+              >
+              </v-btn>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -339,7 +373,7 @@
               >
             </div>
 
-            <v-btn text class="ml-12">
+            <v-btn text class="ml-12 btn" to="/">
               <v-icon small>mdi-home</v-icon> HOME
             </v-btn>
             <v-btn text class="ml-2">
@@ -387,7 +421,7 @@
             <v-btn icon @click.stop="drawer = !drawer">
               <v-icon small>mdi-menu</v-icon>
             </v-btn>
-            <v-btn icon>
+            <v-btn icon to="/">
               <v-icon small>mdi-home</v-icon>
             </v-btn>
             <v-btn icon>
@@ -475,17 +509,34 @@ export default {
       "Medicines",
       "Gas(Litro & Laugh)",
     ],
+    dropdown_links: [
+      { link: "All Grocery", to: "products" },
+      { link: "Fruits & Vegetables", to: "products" },
+      { link: "Meat & Fish", to: "products" },
+      { link: " Diary & Eggs", to: "products" },
+      { link: "Medicines", to: "products" },
+      { link: "Gas(Litro & Laugh)", to: "products" },
+    ],
+
     drawer: null,
     allCategory: true,
 
     dialog: false,
     items: [
-      { title: "Fruits & Vegetables", icon: "mdi-fruit-cherries" },
-      { title: "Meat & Fish", icon: "mdi-fish" },
-      { title: "Diary & Eggs", icon: "mdi-egg-easter" },
-      { title: "Medicines", icon: "mdi-medical-bag" },
-      { title: "Gas(Litro & Laugh)", icon: "mdi-gas-cylinder" },
-      { title: "Water bottels", icon: "mdi-bottle-soda-classic" },
+      {
+        title: "Fruits & Vegetables",
+        icon: "mdi-fruit-cherries",
+        to: "products",
+      },
+      { title: "Meat & Fish", icon: "mdi-fish", to: "products" },
+      { title: "Diary & Eggs", icon: "mdi-egg-easter", to: "products" },
+      { title: "Medicines", icon: "mdi-medical-bag", to: "products" },
+      { title: "Gas(Litro & Laugh)", icon: "mdi-gas-cylinder", to: "products" },
+      {
+        title: "Water bottels",
+        icon: "mdi-bottle-soda-classic",
+        to: "products",
+      },
     ],
 
     links: [
@@ -496,23 +547,23 @@ export default {
         subLinks: [
           {
             text: "Kitchen appliance",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Kitchen ware",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Cooling & Heating",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Vacums & Floor care",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Irons",
-            to: "/players",
+            to: "/products",
           },
         ],
       },
@@ -523,19 +574,19 @@ export default {
         subLinks: [
           {
             text: "Mobile accessories",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Audio",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Wearable",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Computer & laptop accessories",
-            to: "/players",
+            to: "/products",
           },
         ],
       },
@@ -546,27 +597,27 @@ export default {
         subLinks: [
           {
             text: "Bath & Body",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Beauty tools",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Hair care",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Makeup",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Men's care",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Skin care",
-            to: "/players",
+            to: "/products",
           },
         ],
       },
@@ -577,31 +628,31 @@ export default {
         subLinks: [
           {
             text: "Baby gear",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Baby Personal care",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Baby safety",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Gifts",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Clothing & accessories",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Nursery",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Baby & toddler toys",
-            to: "/players",
+            to: "/products",
           },
         ],
       },
@@ -612,23 +663,23 @@ export default {
         subLinks: [
           {
             text: "Men's bags",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Men's shoes",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Men's accessories",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Men's underware",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Boy's fashion",
-            to: "/players",
+            to: "/products",
           },
         ],
       },
@@ -639,11 +690,11 @@ export default {
         subLinks: [
           {
             text: "Shoes",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Bags",
-            to: "/players",
+            to: "/products",
           },
         ],
       },
@@ -654,19 +705,19 @@ export default {
         subLinks: [
           {
             text: "Men's Watches",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Women's Watches",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Kids Watches",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Sunglasses   ",
-            to: "/players",
+            to: "/products",
           },
         ],
       },
@@ -677,55 +728,55 @@ export default {
         subLinks: [
           {
             text: "Men's shoes & clothing",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Women's shoes & clothing",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Outdoor recreation",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "Exercise & fitness",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "water sorts",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "boxing & martial arts",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "tennis",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "badminten",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "table tennis",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "football",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "basketball",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "cricket",
-            to: "/players",
+            to: "/products",
           },
           {
             text: "rugby",
-            to: "/players",
+            to: "/products",
           },
         ],
       },
