@@ -262,7 +262,7 @@
                 <v-row class="flex">
                   <v-col class="p-3">
 
-                    <v-btn class="ma-2" tile large color="teal" icon to="s">
+                    <v-btn class="ma-2" tile large color="teal" icon to="/products">
                       <v-avatar class="ma-3 mt-4">
                         <img :src="item.avatar" />
                       </v-avatar>
