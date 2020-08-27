@@ -200,8 +200,8 @@
         transition="slide-x-transition"
       >
         <v-col class="pa-3">
-          <!-- ALL CATEGORIES -->
-          <v-list dense>
+          <!-- ALL CATEGORIES LIST VIEW-->
+          <!-- <v-list dense>
             <v-list class="vlistScroll">
               <div v-for="(link, i) in links" :key="i">
                 <v-list-tile
@@ -212,18 +212,17 @@
                   avatar
                   class="v-list-item"
                 >
-                  <v-list-tile-title v-text="link.text" ></v-list-tile-title>
-                </v-list-tile>
+                  <v-list-tile-title v-text="link.text"></v-list-tile-title>
+                </v-list-tile> -->
 
-                <v-list-group v-else :key="link.text" no-action>
+          <!-- Sub categories List View -->
+          <!-- <v-list-group v-else :key="link.text" no-action>
                   <template v-slot:activator>
                     <v-list-item-title>
                       <v-icon>{{ link.icon }}</v-icon
                       >{{ link.text }}</v-list-item-title
                     >
                   </template>
-
-                  <!-- Sub categories -->
                   <v-list
                     rounded
                     v-for="sublink in link.subLinks"
@@ -233,23 +232,63 @@
                     <v-list-item-group color="primary">
                       <v-list-item>
                         <v-list-item-content>
-                            <v-btn
-                          :to="sublink.to"
-                          text
-                          v-text="sublink.text"
-                          class="btn  "
-                          tile
-                          small=""
-                        >
-                        </v-btn>
+                          <v-btn
+                            :to="sublink.to"
+                            text
+                            v-text="sublink.text"
+                            class="btn  "
+                            tile
+                            small=""
+                          >
+                          </v-btn>
                         </v-list-item-content>
                       </v-list-item>
                     </v-list-item-group>
                   </v-list>
                 </v-list-group>
               </div>
-            </v-list>
-          </v-list>
+            </v-list> -->
+          <!-- </v-list> -->
+
+          <!-- ALL Category Avatar View -->
+          <v-card>
+            <v-tabs
+              v-model="tab"
+              background-color="indigo darken-3"
+              height="100"
+              dark
+            >
+              <v-tab v-for="item in links" :key="item.tab">
+                <v-row class="flex">
+                  <v-col class="p-3">
+
+                    <v-btn class="ma-2" tile large color="teal" icon to="s">
+                      <v-avatar class="ma-3 mt-4">
+                        <img :src="item.avatar" />
+                      </v-avatar>
+                    </v-btn>
+
+                    <v-list-item dark>
+                      <v-list-item-content>
+                        <v-list-item-subtitle>
+                          <v-btn
+                            block
+                            class="pa-3 btn"
+                            x-small
+                            color="light"
+                            text
+                            to="/products"
+                          >
+                            {{ item.text }}
+                          </v-btn>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                </v-row>
+              </v-tab>
+            </v-tabs>
+          </v-card>
         </v-col>
       </v-row>
 
@@ -520,7 +559,18 @@ export default {
 
     drawer: null,
     allCategory: true,
-
+    itemsAV: [
+      { tab: "One", content: "Tab 1 Content" },
+      { tab: "Two", content: "Tab 2 Content" },
+      { tab: "Three", content: "Tab 3 Content" },
+      { tab: "Four", content: "Tab 4 Content" },
+      { tab: "Five", content: "Tab 5 Content" },
+      { tab: "Six", content: "Tab 6 Content" },
+      { tab: "Seven", content: "Tab 7 Content" },
+      { tab: "Eight", content: "Tab 8 Content" },
+      { tab: "Nine", content: "Tab 9 Content" },
+      { tab: "Ten", content: "Tab 10 Content" },
+    ],
     dialog: false,
     items: [
       {
@@ -544,6 +594,8 @@ export default {
         to: "/dashboard",
         icon: "mdi-tools",
         text: "Home & Appliances",
+        avatar:
+          "https://lh3.googleusercontent.com/proxy/IRsg86oBMmzaXfudIwgaZLibpzdtGVJv9yRxvjv_hqBRIEUm4-PG5niwxwSzvoK7DH_BvV3iZKNg09PKyVDFqoYjlqOBadBYQ998XgvSoSAu-qAhJL9C6n6KBPdbnujVfTETfIXiBA",
         subLinks: [
           {
             text: "Kitchen appliance",
@@ -571,6 +623,8 @@ export default {
         to: "/dashboard",
         icon: "mdi-power-plug-outline",
         text: "Electronic Accessories",
+        avatar:
+          " https://new.riverstoneelectronics.com.au/wp-content/uploads/2013/11/electronic-gifts-for-men1.jpg",
         subLinks: [
           {
             text: "Mobile accessories",
@@ -594,6 +648,8 @@ export default {
         to: "/dashboard",
         icon: "mdi-account-heart",
         text: "Health & Beauty",
+        avatar:
+          "https://lh3.googleusercontent.com/proxy/ccj7H0OZUn8uyCB5X3rrcFlNeJmktfJnCbu_Rt_FOBhLnQrm1voD0dG2ZA8-t8l5rV70NZ7BH_iNaIJkl8qQdMmDVXPVJa-8OYlyqm3XRxweePdJ2mEqhFdqv8eS",
         subLinks: [
           {
             text: "Bath & Body",
@@ -625,6 +681,8 @@ export default {
         to: "/dashboard",
         icon: "mdi-baby",
         text: "Babies & Toys",
+        avatar:
+          "https://images.ctfassets.net/9l3tjzgyn9gr/1PUdQqXB2mOah8eAlCdxmm/7ba3c5457773c2bbd3c78c0ad2c07532/plastic-toys-bottles-safe-featured.jpg?fm=jpg&fl=progressive&q=50&w=1200",
         subLinks: [
           {
             text: "Baby gear",
@@ -660,6 +718,8 @@ export default {
         to: "/dashboard",
         icon: "mdi-human",
         text: "Men's Fashion",
+        avatar:
+          "https://dress-trends.com/wp-content/uploads/2019/01/mens-fashion-2019-1-2.jpg",
         subLinks: [
           {
             text: "Men's bags",
@@ -687,6 +747,7 @@ export default {
         to: "/dashboard",
         icon: "mdi-human-female",
         text: "Women's Fashion",
+        avatar: "https://eb1102.oss-cn-hongkong.aliyuncs.com/LM10/M147114B.jpg",
         subLinks: [
           {
             text: "Shoes",
@@ -702,6 +763,8 @@ export default {
         to: "/dashboard",
         icon: "mdi-watch",
         text: "Watches & Accessories",
+        avatar:
+          "https://i.telegraph.co.uk/multimedia/archive/01709/1_1709958i.jpg",
         subLinks: [
           {
             text: "Men's Watches",
@@ -725,6 +788,8 @@ export default {
         to: "/dashboard",
         icon: "mdi-run-fast",
         text: "Sports & Outdoors",
+        avatar:
+          "https://thumbs.dreamstime.com/b/silhouette-action-sport-outdoors-group-kids-having-fun-playing-soccer-football-exercise-community-under-silhouette-170405994.jpg",
         subLinks: [
           {
             text: "Men's shoes & clothing",
@@ -780,12 +845,6 @@ export default {
           },
         ],
       },
-      //   {
-      //     to: "/dashboard",
-      //     ,
-      //     text: "",
-      //     subLinks: {},
-      //   },
     ],
   }),
   methods: {

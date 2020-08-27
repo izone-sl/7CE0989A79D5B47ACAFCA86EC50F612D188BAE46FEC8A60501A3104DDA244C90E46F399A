@@ -200,7 +200,7 @@
                           <template v-slot:activator="{ on, attrs }">
                             <v-btn
                               color="purple"
-                              to=""
+                              to="/product" 
                               class="LinkDecorate"
                               text
                               v-bind="attrs"

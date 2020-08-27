@@ -10,7 +10,12 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn depressed color="cyan darken-3" class="text-light">
+            <v-btn
+              depressed
+              to="/products"
+              color="cyan darken-3"
+              class="text-light btn"
+            >
               View More
             </v-btn>
           </v-toolbar-items>
@@ -33,7 +38,6 @@
                   class="border py-2 m-2"
                   max-width="344"
                   style=" cursor: pointer;"
-                
                 >
                   <v-img
                     :src="require(`@/assets/` + items.image)"
@@ -70,7 +74,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
                             color="purple"
-                            to=""
+                            to="/product"
                             class="LinkDecorate"
                             text
                             v-bind="attrs"
@@ -136,7 +140,12 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn depressed color="cyan darken-3" class="text-light">
+            <v-btn
+              depressed
+              to="/products"
+              color="cyan darken-3"
+              class="text-light btn"
+            >
               View More
             </v-btn>
           </v-toolbar-items>
@@ -196,7 +205,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
                             color="purple"
-                            to=""
+                            to="/product"
                             class="LinkDecorate"
                             text
                             v-bind="attrs"
@@ -262,7 +271,12 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn depressed color="cyan darken-3" class="text-light">
+            <v-btn
+              depressed
+              to="/products"
+              color="cyan darken-3"
+              class="text-light btn"
+            >
               View More
             </v-btn>
           </v-toolbar-items>
@@ -321,7 +335,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
                             color="purple"
-                            to=""
+                            to="/product"
                             class="LinkDecorate"
                             text
                             v-bind="attrs"
